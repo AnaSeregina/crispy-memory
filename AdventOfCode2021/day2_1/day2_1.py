@@ -26,6 +26,7 @@ def main():
             pos_vertical -= int(position_data_list[1])
         else:
             print("Something went wrong!")
+            break
     result = pos_horizontal * pos_vertical
     print(f"result = {result}  pos_horizontal = {pos_horizontal}  pos_vertical = {pos_vertical}")
     
