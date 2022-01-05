@@ -30,7 +30,7 @@ def main():
             aim -= value
         else:
             print("Something went wrong!")
-            break
+            return
     result = pos_horizontal * depth
     print(f"result = {result}  pos_horizontal = {pos_horizontal}  depth = {depth}")
     
