@@ -14,14 +14,12 @@ def main():
     input: List[str] = file_read("day3_1.txt")
     max_value: List[int] = []
     for i in range(0, len(input)):
-        index_n = 0
-        for n in input[i]:
+        for index in range(0, len(input[i])):
             if len(max_value) < len(input[i]):
                 max_value.append(0)
-            if n == '1':
-                max_value[index_n] += 1
-            index_n += 1
-    
+            if input[i][index] == '1':
+                max_value[index] += 1
+            
     min_value: List[int] = []
     for i in range(0, len(max_value)):
         if (max_value[i] > (len(input) - max_value[i])):
