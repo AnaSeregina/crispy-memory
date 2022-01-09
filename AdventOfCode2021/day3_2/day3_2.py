@@ -11,7 +11,7 @@ def file_read(file_name) -> List[str]:
 
 
 def list_to_string(list_value: List[str]) -> str:
-    return ("".join([str(value) for value in list_value]))
+    return ("".join(list_value))
 
 
 def list_of_binary_to_decimal(value: List[str]) -> int:
@@ -36,18 +36,16 @@ def rating_value(data_list_original: List[str], fun) -> int:
     data_list: List[str] = data_list_original
     index_n_max = len(data_list_original[0]) - 1
     index_n = 0
-    bit0_numbers: List[str] = []
-    bit1_numbers: List[str] = []
 
     while (len(data_list) > 1):
+        bit0_numbers: List[str] = []
+        bit1_numbers: List[str] = []
         for i in range(0, len(data_list)):
             if data_list[i][index_n] == '1':
                 bit1_numbers.append(data_list[i])
             elif data_list[i][index_n] == '0':
                 bit0_numbers.append(data_list[i])
         data_list = fun(bit0_numbers, bit1_numbers)
-        bit1_numbers = []
-        bit0_numbers = []
         index_n += 1
         if (index_n > index_n_max): 
             break   
@@ -59,13 +57,13 @@ def rating_value(data_list_original: List[str], fun) -> int:
 def main():
     data_list_original: List[str] = file_read("day3_2.txt")
     oxygen_generator_rating: int = 0
-    CO2_scrubber_rating: int = 0
+    co2_scrubber_rating: int = 0
     oxygen_generator_rating = rating_value(data_list_original, most_common)
-    CO2_scrubber_rating = rating_value(data_list_original, least_common)
-    life_support_rating = oxygen_generator_rating * CO2_scrubber_rating
+    co2_scrubber_rating = rating_value(data_list_original, least_common)
+    life_support_rating = oxygen_generator_rating * co2_scrubber_rating
 
     print(f"oxygen_generator_rating = {oxygen_generator_rating}")
-    print(f"CO2_scrubber_rating = {CO2_scrubber_rating}")
+    print(f"CO2_scrubber_rating = {co2_scrubber_rating}")
     print(f"life_support_rating = {life_support_rating}")
 
 
