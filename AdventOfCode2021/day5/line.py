@@ -21,19 +21,19 @@ class Line:
         return (self.x_start == self.x_end)
 
 
-    def get_all_points(self) -> List[tuple]:
-        line_points: List[tuple] = []
+    def get_all_points(self) -> List[Tuple[int, int]]:
+        line_points: List[Tuple[int, int]] = []
         if (self.horizontal()):
             point0 = min(self.x_start, self.x_end)
             point1 = max(self.x_start, self.x_end)
             for i in range(point0, point1 + 1):
-                line_point: tuple = (i, self.y_start)
+                line_point: Tuple[int, int] = (i, self.y_start)
                 line_points.append(line_point)            
         elif (self.vertical()):
             point0 = min(self.y_start, self.y_end)
             point1 = max(self.y_start, self.y_end)
             for i in range(point0, point1 + 1):
-                line_point: tuple = (self.x_start, i)
+                line_point: Tuple[int, int] = (self.x_start, i)
                 line_points.append(line_point)
         else:
             print(f"Diagonal?")

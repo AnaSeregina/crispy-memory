@@ -17,9 +17,9 @@ def file_read(file_name) -> List[Line]:
 
 
 def points_number_of_two_overlaps(lines: List[Line]) -> int:
-    point_overlaps_number: Dict[tuple, int] = {}
+    point_overlaps_number: Dict[Tuple[int, int], int] = {}
     for i in range(len(lines)):
-        line_points: List[tuple] = lines[i].get_all_points()
+        line_points: List[Tuple[int, int]] = lines[i].get_all_points()
         for point in line_points:
             counter = 1
             if point in point_overlaps_number:
