@@ -1,5 +1,5 @@
 
-from typing import List
+from typing import List, Tuple
 from xmlrpc.client import boolean
 
 
@@ -20,7 +20,21 @@ class Line:
     def vertical(self) -> boolean:
         return (self.x_start == self.x_end)
 
-    
-    def print_line(self):
-        print(f"{self.start_point}   -> {self.end_point}")
-        
+
+    def get_all_points(self) -> List[tuple]:
+        line_points: List[tuple] = []
+        if (self.horizontal()):
+            point0 = min(self.x_start, self.x_end)
+            point1 = max(self.x_start, self.x_end)
+            for i in range(point0, point1 + 1):
+                line_point: tuple = (i, self.y_start)
+                line_points.append(line_point)            
+        elif (self.vertical()):
+            point0 = min(self.y_start, self.y_end)
+            point1 = max(self.y_start, self.y_end)
+            for i in range(point0, point1 + 1):
+                line_point: tuple = (self.x_start, i)
+                line_points.append(line_point)
+        else:
+            print(f"Diagonal?")
+        return line_points        
