@@ -1,40 +1,44 @@
 
 from typing import List, Tuple
 from xmlrpc.client import boolean
+from point import Point
 
 
 class Line:
-    def __init__(self, start_point: str, end_point: str) -> None:
-        self.start_point = list(map(int, start_point.split(",")))
-        self.end_point = list(map(int, end_point.split(",")))
-        self.x_start = self.start_point[0]
-        self.y_start = self.start_point[1]
-        self.x_end = self.end_point[0]
-        self.y_end = self.end_point[1]
+    def __init__(self, start_point: Point, end_point: Point) -> None:
+        self.start = start_point
+        self.end = end_point
 
 
     def horizontal(self) -> boolean:
-        return (self.y_start == self.y_end)
+        return (self.start.y == self.end.y)
         
 
     def vertical(self) -> boolean:
-        return (self.x_start == self.x_end)
+        return (self.start.x == self.end.x)
 
 
-    def get_all_points(self) -> List[Tuple[int, int]]:
-        line_points: List[Tuple[int, int]] = []
-        if (self.horizontal()):
-            point0 = min(self.x_start, self.x_end)
-            point1 = max(self.x_start, self.x_end)
-            for i in range(point0, point1 + 1):
-                line_point: Tuple[int, int] = (i, self.y_start)
-                line_points.append(line_point)            
-        elif (self.vertical()):
-            point0 = min(self.y_start, self.y_end)
-            point1 = max(self.y_start, self.y_end)
-            for i in range(point0, point1 + 1):
-                line_point: Tuple[int, int] = (self.x_start, i)
-                line_points.append(line_point)
-        else:
-            print(f"Diagonal?")
+    def range_params(self, start_point: int, end_point: int) -> List[int]:
+        r: List[int] = [start_point, end_point+1, 1]
+        if start_point > end_point:
+            r = [start_point, end_point-1, -1]
+        return r
+
+
+    def coordinate_list(self, start_point: int, end_point: int) -> List[int]:
+        param: List[int] = self.range_params(start_point, end_point)
+        xy_list: List[int] = []
+        for x in range(param[0], param[1], param[2]):
+            xy_list.append(x)
+        return xy_list
+
+
+    def get_all_points(self) -> List[Point]:       
+        x_list: List[int] = self.coordinate_list(self.start.x, self.end.x)
+        y_list: List[int] = self.coordinate_list(self.start.y, self.end.y)
+        line_points: List[Point] = []
+        for i in range(max(len(x_list), len(y_list))):
+            if i < len(x_list): x: int = x_list[i]
+            if i < len(y_list): y: int = y_list[i]
+            line_points.append(Point(x, y))
         return line_points        

@@ -1,11 +1,9 @@
 #!python3
-
-from line import Line
+from typing import Dict, List
 from point import Point
-from typing import Dict, List, Tuple
+from line import Line
 
-
-def file_read(file_name) -> List[Line]:
+def read_file(file_name) -> List[Line]:
     lines: List[Line] = []
     with open(file_name) as f:
         for line in f:
@@ -15,8 +13,7 @@ def file_read(file_name) -> List[Line]:
             p_start: Point = Point(start_point[0], start_point[1])
             p_end: Point = Point(end_point[0], end_point[1])
             l: Line = Line(p_start, p_end)
-            if (l.horizontal() or l.vertical()):
-                lines.append(l)
+            lines.append(l)
     return lines
 
 
@@ -39,13 +36,12 @@ def points_number_of_two_overlaps(lines: List[Line]) -> int:
         if overlap_number >= 2:
             points_number += 1
     return points_number
-    
+
 
 def main():
-    lines: List[Line] = file_read("AdventOfCode2021/day5/day5.txt")
+    lines: List[Line] = read_file("AdventOfCode2021/day5/day5.txt")
     points_number: int = points_number_of_two_overlaps(lines)
-    print(f"At how many points do at least two lines overlap?\nPoints number: {points_number}")
+    print(f"\nAt how many points do at least two lines overlap?\nPoints number: {points_number}")
     
-
 if __name__ == "__main__":
     main()
