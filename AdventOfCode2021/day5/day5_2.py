@@ -12,7 +12,6 @@ def read_file(file_name) -> List[Line]:
             end_point = list(map(int, point[1].split(",")))
             p_start: Point = Point(start_point[0], start_point[1])
             p_end: Point = Point(end_point[0], end_point[1])
-            #print(f"{p_start}, {p_end} .... {p_start > p_end}")
             l: Line = Line(p_start, p_end)
             lines.append(l)
     return lines
