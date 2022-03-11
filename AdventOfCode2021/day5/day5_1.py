@@ -32,7 +32,7 @@ def point_overlaps(lines: List[Line]) -> Dict[Point, int]:
     return point_overlaps_amount
 
 
-def points_number_of_two_overlaps(lines: List[Line]) -> int:
+def get_point_overlaps(lines: List[Line]) -> int:
     point_overlaps_amount: Dict[Point, int] = point_overlaps(lines)
     points_number = 0
     for overlap_number in point_overlaps_amount.values():
@@ -43,7 +43,7 @@ def points_number_of_two_overlaps(lines: List[Line]) -> int:
 
 def main():
     lines: List[Line] = file_read("AdventOfCode2021/day5/day5.txt")
-    points_number: int = points_number_of_two_overlaps(lines)
+    points_number: int = get_point_overlaps(lines)
     print(f"At how many points do at least two lines overlap?\nPoints number: {points_number}")
     
 
